@@ -1,0 +1,19 @@
+body{
+    width:100%;
+    height:100%;
+    background: rgb(233, 203, 203);
+    overflow: hidden;
+}
+
+.emvid{
+    margin: 20px;
+    overflow: hidden;
+    height: 90%;
+    width: 90%;
+    position:absolute;
+    display: block;
+}
+
+.vidcon{
+    padding: 10px;
+}
