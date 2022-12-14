@@ -5,7 +5,7 @@ body{
     overflow: hidden;
 }
 
-.emvid{
+.vidcon .emvid{
     margin: 20px;
     overflow: hidden;
     height: 90%;
@@ -15,5 +15,7 @@ body{
 }
 
 .vidcon{
+    border: 5px;
+    border-style: dotted;
     padding: 10px;
 }
