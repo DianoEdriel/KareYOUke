@@ -1,9 +1,6 @@
 function searchvid(){
-
-fetch("https://youtube.googleapis.com/youtube/v3/search?maxResults=1&order=viewCount&q=pampanga&key=AIzaSyAIVusd82WaGoihJTZ-9-52K2NAt4gSHYU")
-.then((data)=>{
+$.getJSON("https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=unholy%20acoustic%20karaoke&key=AIzaSyAIVusd82WaGoihJTZ-9-52K2NAt4gSHYU" function(data){
     console.log(data)
 })
-
-
+   
 }
