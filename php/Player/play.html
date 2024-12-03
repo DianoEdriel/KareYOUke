@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video with Custom Controls</title>
+    <style>
+        #player {
+            width: 640px;
+            height: 360px;
+            background-color: #000;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>YouTube Video with Custom Controls</h2>
+    <div id="player"></div>
+    
+    <!-- Custom Play/Pause Buttons -->
+    <div class="controls">
+        <button id="playBtn">Play</button>
+        <button id="pauseBtn">Pause</button>
+    </div>
+
+    <!-- YouTube Iframe API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        let karaOkeEntries = ['1--pwdu-eJE', 'k2nWQ808tCI', 'z_Gsy2Rxvxs'];
+
+        // This function will be called automatically by the YouTube API
+        onYouTubeIframeAPIReady();
+
+        function onYouTubeIframeAPIReady() {
+            loadNextVideo();
+        }
+
+        function loadNextVideo() {
+            if (karaOkeEntries.length === 0) {
+                console.log("No more videos in the queue.");
+                return;
+            }
+
+            const nextVideo = karaOkeEntries[0];
+
+            player = new YT.Player('player', {
+                videoId: nextVideo,
+                playerVars: {
+                    autoplay: 0,
+                    controls: 1,
+                    modestbranding: 1,
+                    rel: 0,
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError,
+                    'onReady': onPlayerReady,
+                }
+            });
+        }
+
+        // onReady event handler to ensure play is triggered after player is ready
+        function onPlayerReady(event) {
+            // Display play button (can be customized for a smooth user experience)
+            document.getElementById('playBtn').style.display = 'block';
+
+            // Simulate a user click after a brief delay to trigger the play
+            setTimeout(function() {
+                document.getElementById('playBtn').click();  // Simulate the user click
+            }, 500);  // Delay of 500ms for a smooth transition
+        }
+
+        // Play button listener
+        document.getElementById('playBtn').addEventListener('click', () => {
+            if (player && typeof player.playVideo === 'function') {
+                player.playVideo();
+            }
+        });
+
+        // Pause button listener
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            if (player && typeof player.pauseVideo === 'function') {
+                player.pauseVideo();
+            }
+        });
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                karaOkeEntries.shift();
+                console.log("Remaining videos:", karaOkeEntries);
+                player.destroy(); // Destroy the current player instance
+                loadNextVideo(); // Load the next video
+            }
+        }
+
+        // Handle player errors
+        function onPlayerError(event) {
+            // Error code 101 or 150 indicates embedding is not allowed
+            if (event.data === 101 || event.data === 150) {
+                alert("Embedding of this video is restricted by the owner. Skipping to the next video.");
+                karaOkeEntries.shift(); // Remove the current video from the list
+                player.destroy(); // Destroy the current player instance
+                loadNextVideo(); // Load the next video
+            } else {
+                console.error("An error occurred:", event.data);
+            }
+        }
+    </script>
+</body>
+</html>

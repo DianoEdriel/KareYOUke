@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <title>KaraYOUke</title>
-    <script src="js/playvid.js"></script>
-    <script src="js/songlist.js"></script>
-    <script src="js/getres.js"></script>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="style.css">
-<body onload="searchvid()">
-<div class="vidcon">
- 
-      <iframe id="reqvid" class="reqvid" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-  
+    <head>
+        <title>KaraYOUke</title>
+        <script src="js/playvid.js"></script>
+        <script src="js/songlist.js"></script>
+        <script src="js/getres.js"></script>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"
+        />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body onload="searchvid()">
+        <div class="vidcon text-center">
+            <!-- Video iframe -->
+            <iframe id="reqvid" class="reqvid" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+            
+            <!-- Play Button -->
+            <button id="playBtn" class="btn btn-primary mt-3" onclick="playVideo()">Play Video</button>
+        </div>
 
-</div>
-
-<script>
-  
-
- 
-</script>
-
-
-</body>
+        <script>
+            // Function to set the video source and play it
+            function playVideo() {
+                const iframe = document.getElementById("reqvid");
+                iframe.src = "https://www.youtube.com/embed/tgbNymZ7vqY";
+            }
+        </script>
+    </body>
 </html>
